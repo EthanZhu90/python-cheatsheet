@@ -24,7 +24,18 @@ imageio
 img = imageio.imread(imgPath)
 imageio.imwrite(imgPath, img)
 ```
-
+glob
+----
+```python
+# get the relative path
+imageList = [os.path.relpath(i, data_dir) for i in glob(data_dir + "/*.png")]
+# make output folder
+os.makedirs(outputFolder, exist_ok=True)
+```
+Multiprocessing
+----
+```python
+```
 
 
 Main
