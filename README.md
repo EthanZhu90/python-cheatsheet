@@ -22,8 +22,10 @@ imageio
 ----
 ```python
 img = imageio.imread(imgPath)
-
+imageio.imwrite(imgPath, img)
 ```
+
+
 
 Main
 ----
