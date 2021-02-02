@@ -35,6 +35,18 @@ os.makedirs(outputFolder, exist_ok=True)
 Multiprocessing
 ----
 ```python
+from multiprocessing import Pool
+# from itertools import cycle 
+
+pool = Pool(processes=8)
+# args_list = cycle([args])
+for chunks_data in tqdm(pool.imap_unordered(func, ImageList)):
+    None  
+pool.close()
+
+def func(args):
+    print(args)
+
 ```
 
 
