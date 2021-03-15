@@ -49,6 +49,8 @@ for vid in tqdm(vid2use):
 #########################
 # scene split
 ##########################
+
+# pip install scenedetect[opencv]
 # Standard PySceneDetect imports:
 from scenedetect import VideoManager
 from scenedetect import SceneManager
