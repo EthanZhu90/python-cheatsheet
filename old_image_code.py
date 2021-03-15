@@ -83,6 +83,6 @@ def find_scenes(video_path, threshold=30.0):
 scenes = find_scenes('goldeneye.mp4')
 #print(scenes)
 
-video_splitter.split_video_mkvmerge(['goldeneye.mp4'], scenes, "$VIDEO_NAME-Scene$SCENE_NUMBER", "test_video_name")
+video_splitter.split_video_ffmpeg(['goldeneye.mp4'], scenes, "$VIDEO_NAME-Scene$SCENE_NUMBER", "test_video_name")
 
 
