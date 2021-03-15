@@ -46,7 +46,9 @@ print(cnt)
 os.makedirs("datasets_480_980", exist_ok=True)
 for vid in tqdm(vid2use):
     shutil.copy("datasets/" +vid, "datasets_480_980/"+vid.replace("/", "_"))
-    
+
+#hdfs dfs -put datasets_480_980.tar hdfs://harunava/home/byte_ailab_us_cvg/user/yizhe.zhu/old_picture
+#hdfs dfs -get  hdfs://harunava/home/byte_ailab_us_cvg/user/yizhe.zhu/old_picture/datasets_480_980.tar
 #########################
 # scene split
 ##########################
