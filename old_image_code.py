@@ -41,6 +41,7 @@ for key, values in stats.items():
         cnt +=1
         vid2use.append(key)
 print(cnt)
+# 31827
 
 os.makedirs("datasets_480_980", exist_ok=True)
 for vid in tqdm(vid2use):
