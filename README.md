@@ -37,15 +37,16 @@ Multiprocessing
 ```python
 from multiprocessing import Pool
 # from itertools import cycle 
-
+def func(args):
+    print(args)
+    
 pool = Pool(processes=8)
 # args_list = cycle([args])
-for chunks_data in tqdm(pool.imap_unordered(func, ImageList)):
+for chunks_data in tqdm(pool.imap_unordered(func, ImageList), total=len(ImageList)):
     None  
 pool.close()
 
-def func(args):
-    print(args)
+
 
 ```
 
