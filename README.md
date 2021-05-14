@@ -23,7 +23,22 @@ imageio
 ```python
 img = imageio.imread(imgPath)
 imageio.imwrite(imgPath, img)
+
+# video 
+reader = imageio.get_reader("xx.mp4")
+frames = [im for i, im in enumerate(reader)]
+fps = reader.get_meta_data()['fps']
+writer = imageio.get_writer("xx_out.mp4", fps=fps)
+for f in frames:
+	writer.append_data(f)
+writer.close()
 ```
+opencv
+----
+```python
+
+```
+
 glob
 ----
 ```python
@@ -46,10 +61,42 @@ for chunks_data in tqdm(pool.imap_unordered(func, ImageList), total=len(ImageLis
     None  
 pool.close()
 
+```
+pyav
+----
+```python 
+import av
+out_container = av.open("reader5/reader5_audio.mp4", 'w')
+stream = out_container.add_stream("h264", rate=fps)
+stream.bit_rate = 2000000
+stream.width = w #480
+stream.height = h #320
+#stream.pix_fmt = 'yuv420p'
+stream.thread_type = "AUTO"
+
+input_container = av.open("/media/ethan/f939a030-6519-4d3f-883a-6d91301b11ee/tmp/reader5/reader_5.mp4")
+raw_audio = input_container.streams.get(audio=0)[0]
+output_audio = out_container.add_stream(template=raw_audio)
+
+for pkt in input_container.demux(raw_audio):
+    if pkt.dts is None:
+        continue
+    pkt.stream = output_audio
+    out_container.mux(pkt)
+
+
+reader = imageio.get_reader("/media/ethan/f939a030-6519-4d3f-883a-6d91301b11ee/tmp/reader5/reader5_com.mp4")
+
+for i, image in enumerate(reader):
+	image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
+	frame = av.VideoFrame.from_ndarray(image, format="bgr24")
+	packet = stream.encode(frame)
+	out_container.mux(packet)
+
+out_container.close()
 
 
 ```
-
 
 Main
 ----
