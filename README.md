@@ -36,7 +36,17 @@ writer.close()
 opencv
 ----
 ```python
-
+cap = cv2.VideoCapture(os.path.join(data_dir, vid))
+fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+our_512 = cv2.VideoWriter(os.path.join(video_512, vid), fourcc, 16, (512, 512))
+while(cap.isOpened()):
+	ret, frame = cap.read()
+	if frame is None:
+		break
+	frame_512 = cv2.resize(frame, (512,512))
+    	our_512.write(frame_512)
+our_512.release()
+cap.release()
 ```
 
 glob
